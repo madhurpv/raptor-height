@@ -1,38 +1,162 @@
-.App {
-  text-align: center;
+/* App layout */
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --brand:#0f172a;
+  --accent:#2563eb;
+  --soft:#eef2f7;
+  --glass: rgba(255,255,255,0.7);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* { box-sizing: border-box; }
+html,body,#root { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: var(--bg); color: var(--brand); }
+
+/* Header */
+.app-header {
+  padding: 18px 28px;
+  border-bottom: 1px solid rgba(15,23,42,0.04);
+  background: linear-gradient(90deg, rgba(37,99,235,0.06), transparent);
+}
+.brand { margin:0; font-size:1.15rem; letter-spacing:0.2px; color:var(--brand); }
+.subtitle { margin-top:6px; color:var(--muted); font-size:0.92rem; }
+
+/* Main split layout */
+.app-body {
+  display: flex;
+  gap: 20px;
+  padding: 22px;
+  align-items: stretch;
+  min-height: calc(100vh - 150px);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Left panel */
+.left-panel {
+  width: 360px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 16px;
+}
+
+/* Generic card used in left panel */
+.card {
+  background: var(--card);
+  border: 1px solid rgba(15,23,42,0.06);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.03);
+}
+
+.card h2 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  color: var(--brand);
+}
+
+/* Results card tweaks */
+.results-card { background: linear-gradient(180deg, #fbfdff, #f7fbff); }
+.results-card .meta { margin-top: 10px; color: var(--muted); font-size: 0.9rem; display:flex; gap:12px; }
+
+/* Right panel */
+.right-panel {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* toolbar above canvas */
+.toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.hint-box {
+  background: var(--glass);
+  border: 1px dashed rgba(37,99,235,0.12);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+.status { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:0.92rem; }
+.ok { color: #065f46; font-weight:600; }
+.muted { color: var(--muted); }
+.divider { width:1px; height:18px; background: rgba(15,23,42,0.06); margin:0 6px; }
+
+/* Canvas container */
+.canvas-wrap {
+  flex: 1;
+  background: linear-gradient(180deg,#ffffff,#fbfdff);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid rgba(15,23,42,0.04);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:auto;
+}
+
+/* Reuse existing image-wrap styles inside CanvasPicker */
+.img-wrap.panel {
+  background: transparent;
+  border: 2px dashed rgba(37,99,235,0.14);
+  padding: 10px;
+  border-radius: 8px;
+  width: min(1100px, 100%);
+  height: auto;
+  display:block;
+}
+
+/* make uploaded image responsive inside */
+.img-wrap img {
+  max-width: 100%;
+  max-height: 75vh;
+  display:block;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
+/* svg overlay elements */
+.points { position:absolute; inset:0; pointer-events:none; }
+.point { width:12px; height:12px; border-radius:50%; background:#ff3b3b; border:2px solid white; transform:translate(-50%,-50%); box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+.line { stroke:#ff3b3b; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Footer */
+.app-footer {
+  padding: 12px 22px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  border-top: 1px solid rgba(15,23,42,0.04);
+  background: transparent;
+}
+
+/* Inputs / buttons tweaks to match look */
+.input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(2,6,23,0.06);
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.btn {
+  display:inline-block;
+  padding: 9px 12px;
+  background: var(--accent);
   color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight:600;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* small responsive behaviour */
+@media (max-width: 900px) {
+  .app-body { flex-direction: column; padding: 12px; }
+  .left-panel { width: 100%; order: 2; }
+  .right-panel { order: 1; }
+  .img-wrap img { max-height: 55vh; }
 }

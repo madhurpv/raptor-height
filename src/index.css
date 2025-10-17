@@ -1,13 +1,221 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* src/index.css
+   Full, modern styles for the Eagle Height app.
+   Paste this whole file over your existing index.css
+*/
+
+/* --- Reset + base --- */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; font-family: Inter, Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial; background: #f3f6fb; color: #102a43; }
+
+/* --- App layout --- */
+.app {
+  display: flex;
+  gap: 18px;
+  padding: 18px;
+  align-items: flex-start;
+  min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Left column (inputs / controls) */
+.left-panel {
+  width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Generic panel card used across the app */
+.panel {
+  background: #ffffff;
+  border: 1px solid #e6eef7;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(16, 42, 67, 0.06);
+}
+
+/* Headings inside panels */
+.header {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b2540;
+  margin-bottom: 10px;
+}
+
+/* --- Right/center image area (big) --- */
+.right-panel {
+  flex: 1 1 66%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+/* Small top controls area (upload button + hint) */
+.top-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 0;
+}
+
+/* Upload button styling */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cfe6ff;
+  background: linear-gradient(180deg,#1e90ff 0%, #2563eb 100%);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease;
+  box-shadow: 0 4px 10px rgba(37,99,235,0.12);
+}
+.btn:active { transform: translateY(1px); box-shadow: 0 2px 6px rgba(37,99,235,0.08); }
+
+/* Secondary (unstyled) button used for reset */
+.btn.secondary {
+  background: #fff;
+  color: #16324f;
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+}
+
+/* Hint / small text */
+.hint, .small {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.3;
+}
+
+/* Input fields */
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbe7f7;
+  background: #fbfdff;
+  font-size: 14px;
+  color: #0b2540;
+  outline: none;
+}
+.input:focus {
+  border-color: #7fb3ff;
+  box-shadow: 0 6px 18px rgba(47, 124, 237, 0.12);
+}
+
+/* Species selector block spacing overrides */
+.panel .input + .input { margin-top: 8px; }
+
+/* --- Image wrapper & canvas/SVG overlay --- */
+.img-wrap {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg,#fbfdff,#eef6ff);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 420px;
+  border: 1px dashed rgba(37,99,235,0.18);
+  overflow: hidden;
+}
+
+/* Actual uploaded image - keep contained */
+.img-wrap img {
+  max-width: 100%;
+  max-height: 78vh;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: 0 8px 28px rgba(16,42,67,0.06);
+}
+
+/* SVG overlay covers the full display area; pointer-events disabled so clicks go to container */
+.points {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Small red dot for points */
+.point {
+  fill: #ff3b3b;
+  stroke: #fff;
+  stroke-width: 2px;
+  r: 6;
+  cursor: crosshair;
+  transition: transform .12s ease;
+}
+
+/* Line between points */
+.line {
+  stroke: #ff3b3b;
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 4px 8px rgba(255,59,59,0.12));
+}
+
+/* Pixel readout bubble */
+.readout {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  background: rgba(255,255,255,0.9);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6eef7;
+  font-size: 13px;
+  color: #0b2540;
+  box-shadow: 0 6px 16px rgba(11,37,64,0.04);
+}
+
+/* --- Results card in left column --- */
+.results {
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#f0f9ff,#e6f4ff);
+  border: 1px solid #cfeeff;
+  color: #08344b;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* result value */
+.results .value {
+  font-size: 18px;
+  color: #0b2540;
+}
+
+/* subtle footer text */
+.footer-note {
+  font-size: 12px;
+  color: #62737d;
+}
+
+/* --- Responsive: stack on small screens --- */
+@media (max-width: 920px) {
+  .app { flex-direction: column; padding: 12px; }
+  .left-panel { width: 100%; order: 2; }
+  .right-panel { order: 1; width: 100%; }
+  .img-wrap { min-height: 260px; }
+  .top-controls { flex-direction: column; align-items: stretch; gap: 8px; }
+}
+
+/* Accessibility */
+button:focus, .input:focus {
+  outline: 3px solid rgba(99,144,255,0.18);
+  outline-offset: 2px;
 }
