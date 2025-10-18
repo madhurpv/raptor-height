@@ -105,13 +105,19 @@ export default function App() {
     img.src = imageSrc;
   }, [imageSrc, points, f35, selectedSpeciesId, manualWingspan, cameraHeight, halfWing]);
 
-  function handleImage(src) {
+  function handleImage(src, focal35) {
     setImageSrc(src);
     setPoints([]);
     setDistance(null);
     setAltitude(null);
     setUncertainty(null);
+
+    if (focal35 && !isNaN(focal35)) {
+      setF35(parseFloat(focal35));
+      console.log('Auto-detected 35 mm equivalent focal length:', focal35);
+    }
   }
+
 
   function handleReset() {
     setImageSrc(null);
