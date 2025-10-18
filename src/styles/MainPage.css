@@ -1,0 +1,161 @@
+/* General layout */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  flex-wrap: wrap;
+  transition: background 0.5s, color 0.5s;
+  min-height: 0;
+}
+
+.controls-panel {
+  flex: 1 1 340px;
+  min-width: 300px;
+  max-width: 450px;
+  background: var(--panel-bg);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  color: var(--text-color);
+  transition: all 0.5s ease;
+}
+
+.canvas-panel {
+  flex: 2 1 600px;
+  background: var(--canvas-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+/* Inputs & Buttons */
+.input-group, .checkbox-group {
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 4px var(--accent);
+}
+
+.double-input {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+}
+
+.btn.secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+.results {
+  margin-top: 12px;
+  font-size: 0.95rem;
+}
+
+/* Footer note */
+.footer-note {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Light mode */
+:root {
+  --panel-bg: #fafafa;
+  --canvas-bg: #ffffff;
+  --text-color: #1e293b;
+  --border-color: #cbd5e1;
+  --input-bg: #f8fafc;
+  --shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --secondary: #64748b;
+  background: #f5f6fa;
+  color: var(--text-color);
+}
+
+/* Dark mode */
+body.dark-mode {
+  --panel-bg: #1e293b;
+  --canvas-bg: #0f172a;
+  --text-color: #f1f5f9;
+  --border-color: #334155;
+  --input-bg: #1e293b;
+  --shadow: 0 2px 10px rgba(0,0,0,0.6);
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --secondary: #475569;
+  background: #0f172a;
+  color: var(--text-color);
+  transition: background 0.5s, color 0.5s;
+}
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+========================================================= */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column !important; /* stack vertically */
+    flex-wrap: nowrap !important; /* prevent wrapping issues */
+    padding: 12px;
+    min-height: auto; /* allow content height */
+    width: 100%;
+  }
+
+  .controls-panel,
+  .canvas-panel {
+    flex: none !important; /* remove flex grow/shrink */
+    width: 100% !important; /* full width */
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .canvas-panel {
+    margin-top: 16px; /* spacing below controls */
+    min-height: 50vh; /* optional height for canvas */
+  }
+
+  .double-input {
+    flex-direction: column;
+  }
+}

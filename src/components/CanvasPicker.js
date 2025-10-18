@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { pixelsDistance } from '../utils/calc.js';
+import "../styles/CanvasPicker.css"
 
 export default function CanvasPicker({ src, onPointsChange }) {
   const canvasRef = useRef(null);
@@ -313,28 +314,9 @@ export default function CanvasPicker({ src, onPointsChange }) {
 
   // ─────────────── Render ───────────────
   return (
-    <div
-      ref={containerRef}
-      style={{
-        width: '100%',
-        height: '65vh',
-        position: 'relative',
-        borderRadius: 8,
-        overflow: 'hidden',
-        touchAction: 'none', // important for mobile gestures
-      }}
-    >
+    <div ref={containerRef} className="canvas-container">
       {!img && (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#64748b',
-          }}
-        >
+        <div className="placeholder">
           Upload image to begin
         </div>
       )}
@@ -342,9 +324,6 @@ export default function CanvasPicker({ src, onPointsChange }) {
       <canvas
         ref={canvasRef}
         style={{
-          width: '100%',
-          height: '100%',
-          display: 'block',
           cursor:
             draggingPointIndex !== null
               ? 'grabbing'
@@ -353,7 +332,6 @@ export default function CanvasPicker({ src, onPointsChange }) {
               : isPanning
               ? 'grabbing'
               : 'crosshair',
-          background: '#f8fafc',
         }}
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}

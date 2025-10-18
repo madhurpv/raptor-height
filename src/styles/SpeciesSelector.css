@@ -1,0 +1,67 @@
+/* Base (light mode) */
+.species__control {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  min-height: 40px !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.species__control:hover {
+  border-color: #94a3b8 !important;
+}
+
+.species__menu {
+  border-radius: 8px !important;
+  z-index: 10 !important;
+}
+
+.species__option {
+  background-color: white !important;
+  color: #1e293b !important;
+  cursor: pointer !important;
+}
+
+.species__option--is-focused {
+  background-color: #e2e8f0 !important;
+}
+
+.species__option--is-selected {
+  background-color: #2563eb !important;
+  color: white !important;
+}
+
+.species__single-value {
+  color: #0f172a !important;
+  font-weight: 500 !important;
+}
+
+/* ─────────────── DARK MODE ─────────────── */
+.dark-mode .species__control {
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .species__menu {
+  background-color: #1e293b !important;
+}
+
+.dark-mode .species__option {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .species__option--is-focused {
+  background-color: #334155 !important;
+}
+
+.dark-mode .species__option--is-selected {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+.dark-mode .species__single-value {
+  color: #e2e8f0 !important;
+}
