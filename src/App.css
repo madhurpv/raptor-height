@@ -160,3 +160,56 @@ html,body,#root { height:100%; margin:0; font-family: Inter, system-ui, -apple-s
   .right-panel { order: 1; }
   .img-wrap img { max-height: 55vh; }
 }
+
+
+
+
+
+
+
+.main-page {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.main-page .content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* Left and right panels split screen equally on desktop */
+.left-panel {
+  flex: 1;
+  min-width: 320px;
+}
+
+.right-panel {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Panels style */
+.panel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+}
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 768px) {
+  .main-page .content {
+    flex-direction: column;
+  }
+  .right-panel {
+    order: -1;
+  }
+}

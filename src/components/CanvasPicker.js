@@ -317,7 +317,7 @@ export default function CanvasPicker({ src, onPointsChange }) {
       ref={containerRef}
       style={{
         width: '100%',
-        height: '70vh',
+        height: '65vh',
         position: 'relative',
         borderRadius: 8,
         overflow: 'hidden',
