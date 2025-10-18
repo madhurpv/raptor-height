@@ -18,6 +18,8 @@ import speciesData from './data/speciesData.js';
 6. Maths explaining document
 7. Change titlebar title
 8. Add h1 heading (and logo) on page
+9. Mobile optimize
+10. Better uncertainity
 
 */
 

@@ -12,10 +12,15 @@ export default function CanvasPicker({ src, onPointsChange }) {
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState(null);
   const [draggingPointIndex, setDraggingPointIndex] = useState(null);
-  const [hoverPointIndex, setHoverPointIndex] = useState(null); // 👈 new
+  const [hoverPointIndex, setHoverPointIndex] = useState(null);
 
   const baseScaleRef = useRef(1);
 
+  // Touch handling
+  const touchMode = useRef(null); // 'pan' | 'pinch'
+  const pinchStart = useRef({ dist: 0, scale: 1, center: { x: 0, y: 0 }, offset: { x: 0, y: 0 } });
+
+  // ─────────────── Setup ───────────────
   useEffect(() => {
     function resizeCanvas() {
       const canvas = canvasRef.current;
@@ -65,6 +70,7 @@ export default function CanvasPicker({ src, onPointsChange }) {
     draw(canvas, img, points, userScale, offset);
   }, [points, userScale, offset, img]);
 
+  // ─────────────── Drawing ───────────────
   function draw(canvas, image, pts, scale, offsetVal) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -114,6 +120,7 @@ export default function CanvasPicker({ src, onPointsChange }) {
     ctx.restore();
   }
 
+  // ─────────────── Helpers ───────────────
   function clientToImageXY(clientX, clientY) {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
@@ -137,32 +144,37 @@ export default function CanvasPicker({ src, onPointsChange }) {
     return -1;
   }
 
+  // ─────────────── Zoom (mouse) ───────────────
   function handleWheel(e) {
     if (!img) return;
     e.preventDefault();
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
+    const rect = canvasRef.current.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
     const zoomFactor = e.deltaY < 0 ? 1.12 : 0.88;
+    zoomAt(mouseX, mouseY, zoomFactor);
+  }
+
+  function zoomAt(x, y, zoomFactor) {
     const newScale = Math.min(Math.max(userScale * zoomFactor, 0.05), 40);
     const baseScale = baseScaleRef.current;
     const oldComposite = baseScale * userScale;
     const newComposite = baseScale * newScale;
-    const ix = (mouseX - offset.x) / oldComposite;
-    const iy = (mouseY - offset.y) / oldComposite;
-    const offsetNewX = mouseX - newComposite * ix;
-    const offsetNewY = mouseY - newComposite * iy;
+    const ix = (x - offset.x) / oldComposite;
+    const iy = (y - offset.y) / oldComposite;
+    const offsetNewX = x - newComposite * ix;
+    const offsetNewY = y - newComposite * iy;
     setUserScale(newScale);
     setOffset({ x: offsetNewX, y: offsetNewY });
   }
 
+  // ─────────────── Mouse ───────────────
   function handleMouseDown(e) {
     if (!img) return;
 
     if (e.button === 1 || e.button === 2) {
       e.preventDefault();
-      startPan(e);
+      startPan(e.clientX, e.clientY);
       return;
     }
 
@@ -176,17 +188,17 @@ export default function CanvasPicker({ src, onPointsChange }) {
         setPoints(newPts);
         onPointsChange && onPointsChange(newPts);
       } else {
-        startPan(e);
+        startPan(e.clientX, e.clientY);
       }
     }
   }
 
-  function startPan(e) {
+  function startPan(clientX, clientY) {
     const rect = canvasRef.current.getBoundingClientRect();
     setIsPanning(true);
     setPanStart({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: clientX - rect.left,
+      y: clientY - rect.top,
       origOffset: { ...offset },
     });
   }
@@ -197,7 +209,6 @@ export default function CanvasPicker({ src, onPointsChange }) {
     const cx = e.clientX - rect.left;
     const cy = e.clientY - rect.top;
 
-    // ✅ Check hover state when not dragging
     if (!isPanning && draggingPointIndex === null) {
       const hover = hitTestPoint(e.clientX, e.clientY);
       setHoverPointIndex(hover >= 0 ? hover : null);
@@ -227,6 +238,80 @@ export default function CanvasPicker({ src, onPointsChange }) {
     setPanStart(null);
   }
 
+  // ─────────────── Touch ───────────────
+  function handleTouchStart(e) {
+    if (!img) return;
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      const hit = hitTestPoint(t.clientX, t.clientY);
+      if (hit >= 0) {
+        setDraggingPointIndex(hit);
+      } else if (points.length < 2) {
+        const [ix, iy] = clientToImageXY(t.clientX, t.clientY);
+        const newPts = [...points, [ix, iy]];
+        setPoints(newPts);
+        onPointsChange && onPointsChange(newPts);
+      } else {
+        touchMode.current = 'pan';
+        startPan(t.clientX, t.clientY);
+      }
+    } else if (e.touches.length === 2) {
+      touchMode.current = 'pinch';
+      const [t1, t2] = e.touches;
+      const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      pinchStart.current = {
+        dist,
+        scale: userScale,
+        center: {
+          x: (t1.clientX + t2.clientX) / 2,
+          y: (t1.clientY + t2.clientY) / 2,
+        },
+        offset: { ...offset },
+      };
+    }
+  }
+
+  function handleTouchMove(e) {
+    if (!img) return;
+    e.preventDefault();
+
+    if (touchMode.current === 'pan' && e.touches.length === 1 && panStart) {
+      const t = e.touches[0];
+      const rect = canvasRef.current.getBoundingClientRect();
+      const cx = t.clientX - rect.left;
+      const cy = t.clientY - rect.top;
+      const dx = cx - panStart.x;
+      const dy = cy - panStart.y;
+      setOffset({
+        x: panStart.origOffset.x + dx,
+        y: panStart.origOffset.y + dy,
+      });
+    } else if (touchMode.current === 'pinch' && e.touches.length === 2) {
+      const [t1, t2] = e.touches;
+      const newDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      const factor = newDist / pinchStart.current.dist;
+      zoomAt(
+        pinchStart.current.center.x - canvasRef.current.getBoundingClientRect().left,
+        pinchStart.current.center.y - canvasRef.current.getBoundingClientRect().top,
+        factor
+      );
+    } else if (draggingPointIndex !== null && e.touches.length === 1) {
+      const t = e.touches[0];
+      const [ix, iy] = clientToImageXY(t.clientX, t.clientY);
+      const newPts = points.map((p, i) => (i === draggingPointIndex ? [ix, iy] : p));
+      setPoints(newPts);
+      onPointsChange && onPointsChange(newPts);
+    }
+  }
+
+  function handleTouchEnd() {
+    touchMode.current = null;
+    setIsPanning(false);
+    setDraggingPointIndex(null);
+    setPanStart(null);
+  }
+
+  // ─────────────── Render ───────────────
   return (
     <div
       ref={containerRef}
@@ -236,6 +321,7 @@ export default function CanvasPicker({ src, onPointsChange }) {
         position: 'relative',
         borderRadius: 8,
         overflow: 'hidden',
+        touchAction: 'none', // important for mobile gestures
       }}
     >
       {!img && (
@@ -263,7 +349,7 @@ export default function CanvasPicker({ src, onPointsChange }) {
             draggingPointIndex !== null
               ? 'grabbing'
               : hoverPointIndex !== null
-              ? 'grab' // 👈 show grab when hovering over point
+              ? 'grab'
               : isPanning
               ? 'grabbing'
               : 'crosshair',
@@ -278,6 +364,9 @@ export default function CanvasPicker({ src, onPointsChange }) {
           setHoverPointIndex(null);
         }}
         onContextMenu={(e) => e.preventDefault()}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       />
     </div>
   );
