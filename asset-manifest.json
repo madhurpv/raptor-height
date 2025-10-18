@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/raptor-height/static/css/main.8d42fc14.css",
-    "main.js": "/raptor-height/static/js/main.e9d872e7.js",
+    "main.js": "/raptor-height/static/js/main.939486ae.js",
     "static/js/453.5b82b606.chunk.js": "/raptor-height/static/js/453.5b82b606.chunk.js",
+    "static/media/Logo.jpg": "/raptor-height/static/media/Logo.8629dad5deb442d983a0.jpg",
     "index.html": "/raptor-height/index.html",
     "main.8d42fc14.css.map": "/raptor-height/static/css/main.8d42fc14.css.map",
-    "main.e9d872e7.js.map": "/raptor-height/static/js/main.e9d872e7.js.map",
+    "main.939486ae.js.map": "/raptor-height/static/js/main.939486ae.js.map",
     "453.5b82b606.chunk.js.map": "/raptor-height/static/js/453.5b82b606.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8d42fc14.css",
-    "static/js/main.e9d872e7.js"
+    "static/js/main.939486ae.js"
   ]
 }
