@@ -44,7 +44,7 @@ export default function ImagePicker({ onImage }) {
       </button>
       <input
         type="file"
-        accept="image/*"
+        accept=""
         ref={fileRef}
         style={{ display: 'none' }}
         onChange={handleFile}

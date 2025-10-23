@@ -31,6 +31,13 @@
   transition: background-color 0.3s ease;
 }
 
+canvas {
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+
+
+
 /* ─────────────── DARK MODE ─────────────── */
 .dark-mode .canvas-container .placeholder {
   color: #cbd5e1; /* lighter gray for dark mode */

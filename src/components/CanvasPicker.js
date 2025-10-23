@@ -75,6 +75,13 @@ export default function CanvasPicker({ src, onPointsChange }) {
   function draw(canvas, image, pts, scale, offsetVal) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // Disable image smoothing for pixelated (jagged) zoom
+    ctx.imageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;    // for Firefox
+    ctx.webkitImageSmoothingEnabled = false; // for Safari
+    ctx.msImageSmoothingEnabled = false;     // for older IE/Edge
+
     const baseScale = baseScaleRef.current;
     const composite = baseScale * scale;
 
@@ -148,7 +155,6 @@ export default function CanvasPicker({ src, onPointsChange }) {
   // ─────────────── Zoom (mouse) ───────────────
   function handleWheel(e) {
     if (!img) return;
-    e.preventDefault();
     const rect = canvasRef.current.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
@@ -288,14 +294,19 @@ export default function CanvasPicker({ src, onPointsChange }) {
         y: panStart.origOffset.y + dy,
       });
     } else if (touchMode.current === 'pinch' && e.touches.length === 2) {
-      const [t1, t2] = e.touches;
-      const newDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
-      const factor = newDist / pinchStart.current.dist;
-      zoomAt(
-        pinchStart.current.center.x - canvasRef.current.getBoundingClientRect().left,
-        pinchStart.current.center.y - canvasRef.current.getBoundingClientRect().top,
-        factor
-      );
+        const [t1, t2] = e.touches;
+        const newDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+        let factor = newDist / pinchStart.current.dist;
+
+        // Apply damping for smoother, slower zoom
+        const zoomSpeed = 0.1; // smaller = slower zoom (try 0.2–0.3)
+        factor = 1 + (factor - 1) * zoomSpeed;
+
+        zoomAt(
+            pinchStart.current.center.x - canvasRef.current.getBoundingClientRect().left,
+            pinchStart.current.center.y - canvasRef.current.getBoundingClientRect().top,
+            factor
+        );
     } else if (draggingPointIndex !== null && e.touches.length === 1) {
       const t = e.touches[0];
       const [ix, iy] = clientToImageXY(t.clientX, t.clientY);
