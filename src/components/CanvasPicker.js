@@ -53,6 +53,11 @@ export default function CanvasPicker({ src, onPointsChange }) {
       setImg(null);
       setPoints([]);
       onPointsChange && onPointsChange([]);
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx && ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
       return;
     }
     const I = new Image();
@@ -163,7 +168,7 @@ export default function CanvasPicker({ src, onPointsChange }) {
   }
 
   function zoomAt(x, y, zoomFactor) {
-    const newScale = Math.min(Math.max(userScale * zoomFactor, 0.05), 40);
+    const newScale = Math.min(Math.max(userScale * zoomFactor, 0.05), 100);
     const baseScale = baseScaleRef.current;
     const oldComposite = baseScale * userScale;
     const newComposite = baseScale * newScale;

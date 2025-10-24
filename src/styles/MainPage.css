@@ -92,13 +92,6 @@
   font-size: 0.95rem;
 }
 
-/* Footer note */
-.footer-note {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-
 /* Light mode */
 :root {
   --panel-bg: #fafafa;

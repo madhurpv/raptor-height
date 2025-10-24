@@ -72,6 +72,8 @@ export default function MainPage() {
         f35_mm: parseFloat(f35),
         L_m,
         s_px: sPx,
+        selectedSpecies: selectedSpecies,
+        altitude: D,
       });
       setUncertainty(uq);
     };
@@ -174,7 +176,7 @@ export default function MainPage() {
           <div>Altitude: {altitude ? `${altitude.toFixed(2)} m` : "—"}</div>
           {uncertainty != null && (
             <div className="footer-note">
-              Estimated uncertainty: ±{(uncertainty * 100).toFixed(1)}%
+              Estimated uncertainty: ±{(uncertainty * 100).toFixed(1)}% ({(distance-distance*uncertainty).toFixed(2)}m to {(distance+distance*uncertainty).toFixed(2)}m)
             </div>
           )}
         </div>

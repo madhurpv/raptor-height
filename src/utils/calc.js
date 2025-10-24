@@ -15,11 +15,12 @@ export function computeDistanceMeters({ L_m, f35_mm, W_px, s_px }) {
 }
 
 // Simple relative uncertainty estimate (conservative sum of relative errors)
-export function estimateRelativeUncertainty({ delta_f35_mm, delta_L_m, delta_s_px, f35_mm, L_m, s_px }) {
+export function estimateRelativeUncertainty({ delta_f35_mm, delta_L_m, delta_s_px, f35_mm, L_m, s_px, selectedSpecies, altitude }) {
   // if inputs missing, return null
-  if (!f35_mm || !L_m || !s_px) return null;
-  const relF = Math.abs(delta_f35_mm || 0) / f35_mm;
+  if (!f35_mm || !L_m || !s_px || !selectedSpecies || !altitude) return null;
+  /*OLD : const relF = Math.abs(delta_f35_mm || 0) / f35_mm;
   const relL = Math.abs(delta_L_m || 0) / L_m;
   const relS = Math.abs(delta_s_px || 0) / s_px;
-  return relF + relL + relS; // fraction (e.g., 0.05 = 5%)
+  return relF + relL + relS; // fraction (e.g., 0.05 = 5%)*/
+  return (selectedSpecies.variance)/selectedSpecies.wingspan_m;
 }

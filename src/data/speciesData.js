@@ -47,6 +47,34 @@ const speciesData = [
     variance: 0.17,
     source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Clark, W. S., J. S. Marks, G. M. Kirwan, and P. F. D. Boesman (2020). Black Eagle (Ictinaetus malaiensis), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.blaeag1.01"
   },
+  {
+    id: "tawnyeagle",
+    name: "Tawny Eagle (1.71m)",
+    wingspan_m: 1.71,
+    variance: 0.12,
+    source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Kemp, A. C. and G. M. Kirwan (2020). Tawny Eagle (Aquila rapax), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.taweag1.01"
+  },
+  {
+    id: "steppeeagle",
+    name: "Steppe Eagle (1.90m)",
+    wingspan_m: 1.90,
+    variance: 0.24,
+    source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Meyburg, B.-U., P. F. D. Boesman, J. S. Marks, and C. J. Sharpe (2020). Steppe Eagle (Aquila nipalensis), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.steeag1.01"
+  },
+  {
+    id: "bonelliseagle",
+    name: "Bonelli's Eagle (1.60m)",
+    wingspan_m: 1.60,
+    variance: 0.16,
+    source: "García, V., Moreon-Opo, R. and Tintó, A. (2013). Sex differentiation of Bonelli's Eagle Aquila fasciata in western Europe using morphometrics and plumage colour patterns. Ardeola. 60(2): 261-277., as cited in Orta, J., G. M. Kirwan, D. A. Christie, P. F. D. Boesman, J. S. Marks, and E. Garcia (2020). Bonelli's Eagle (Aquila fasciata), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.boneag2.01"
+  },
+  {
+    id: "greaterspottedeagle",
+    name: "Greater Spotted Eagle (1.70m)",
+    wingspan_m: 1.70,
+    variance: 0.15,
+    source: "https://en.wikipedia.org/wiki/Greater_spotted_eagle"
+  },
 ];
 
 export default speciesData;

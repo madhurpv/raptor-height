@@ -15,8 +15,7 @@ import './App.css'
 6. Maths explaining document
 7. Better uncertainity values
 8. Add more birds
-9. Better zooming on mobiles
-10. 'Upload image to begin' should be clickable when no image is selected
+9. 'Upload image to begin' should be clickable when no image is selected
 
 */
 

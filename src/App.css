@@ -182,8 +182,9 @@ html, body, #root {
 }
 
 .footer-note {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
+  opacity: 0.8;
 }
 
 /* =========================================================
