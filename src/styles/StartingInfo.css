@@ -1,0 +1,124 @@
+/* =========================================================
+   POPUP OVERLAY
+   (Dark translucent background, centered content)
+========================================================= */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px; /* prevents edge clipping on small screens */
+  backdrop-filter: blur(2px);
+  animation: fadeInOverlay 0.2s ease-out;
+}
+
+/* =========================================================
+   POPUP CARD
+   (Matches panel style: soft bg, rounded edges, shadow)
+========================================================= */
+.popup-card {
+  position: relative;
+  background: var(--panel-bg);
+  color: var(--text-color);
+  padding: 20px 24px;
+  width: 90%;
+  max-width: 1050px;
+
+  /* Critical: responsive height management */
+  max-height: 80vh;
+  overflow: hidden;
+
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  transition: background 0.5s, color 0.5s;
+  animation: fadeInCard 0.25s ease-out;
+}
+
+/* Scrollable content area */
+.popup-scroll {
+  margin-top: 20px;
+  padding-right: 20px;  /* avoid text touching scrollbar */
+  padding-left: 16px;
+  padding-bottom: 20px;
+  overflow-y: auto;
+  max-height: calc(80vh - 80px); /* space for padding + close button */
+  padding-right: 8px; 
+}
+
+/* =========================================================
+   CLOSE BUTTON
+   (Small icon button matching theme colors)
+========================================================= */
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.popup-close:hover {
+  color: var(--accent-hover);
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   (Make headings/buttons consistent with your UI rhythm)
+========================================================= */
+.popup-card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.popup-card p,
+.popup-card li {
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
+/* Better spacing for list containers */
+.popup-card ol,
+.popup-card ul {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+@keyframes fadeInCard {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+========================================================= */
+@media (max-width: 600px) {
+  .popup-card {
+    padding: 16px;
+    border-radius: 10px;
+    max-height: 85vh;
+  }
+
+  .popup-scroll {
+    max-height: calc(85vh - 32px);
+  }
+
+  .popup-card h2 {
+    font-size: 1.25rem;
+  }
+}

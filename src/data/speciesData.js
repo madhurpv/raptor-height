@@ -27,6 +27,13 @@ const speciesData = [
     source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Orta, J., P. F. D. Boesman, and J. S. Marks (2020). Eurasian Kestrel (Falco tinnunculus), version 1.0. In Birds of the World (S. M. Billerman, B. K. Keeney, P. G. Rodewald, and T. S. Schulenberg, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.eurkes.01"
   },
   {
+    id: "shikra",
+    name: "Shikra (0.58m)",
+    wingspan_m: 0.58,
+    variance: 0.10,
+    source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Kemp, A. C. and G. M. Kirwan (2024). Shikra (Tachyspiza badia), version 1.1. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.shikra1.01.1"
+  },
+  {
     id: "crestedserpanteagle",
     name: "Crested Serpant Eagle (1.39m)",
     wingspan_m: 1.39,

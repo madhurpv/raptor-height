@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header.js';
 import MainPage from './components/MainPage.js';
 import Footer from './components/Footer.js';
+import StartingInfo from './components/StartingInfo.js';
 import './App.css'
 
 
 /* TODO : 
 
-1. Correct RESET button
 2. Add reset wingspan markers button
 3. Add warnings and pitfalls
 4. User guide
@@ -23,8 +23,13 @@ import './App.css'
 
 
 export default function App() {
+
+  const [showStartingInfo, setShowStartingInfo] = useState(true);
+
+
   return (
     <div className="app-container">
+      {showStartingInfo && <StartingInfo onClose={() => setShowStartingInfo(false)} />}
       <Header />
       <MainPage />
       <Footer />

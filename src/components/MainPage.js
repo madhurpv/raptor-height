@@ -33,7 +33,7 @@ export default function MainPage() {
       return;
     }
 
-    let sPx = pixelsDistance(points[0], points[1]);
+    let sPx = pixelsDistance(points[0], points[1]); // Width/distance between 2 selected points
     if (halfWing) sPx *= 2;
 
     const img = new window.Image();
@@ -73,7 +73,7 @@ export default function MainPage() {
         L_m,
         s_px: sPx,
         selectedSpecies: selectedSpecies,
-        altitude: D,
+        altitude: D
       });
       setUncertainty(uq);
     };
