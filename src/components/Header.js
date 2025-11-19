@@ -90,7 +90,7 @@ export default function Header() {
               transition: "color 0.4s ease",
             }}
           >
-            Estimate distance and altitude from bird photos
+            Estimate distance from bird photos
           </p>
         </div>
       </div>

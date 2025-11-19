@@ -153,7 +153,7 @@ export default function MainPage() {
               onChange={(e) => setF35(e.target.value)}
             />
           </div>
-          <div>
+          {/*<div>
             <label>Camera height (m)</label>
             <input
               className="input"
@@ -161,7 +161,7 @@ export default function MainPage() {
               value={cameraHeight}
               onChange={(e) => setCameraHeight(e.target.value)}
             />
-          </div>
+          </div>*/}
         </div>
 
         <div className="action-buttons">
@@ -172,8 +172,8 @@ export default function MainPage() {
         </div>
 
         <div className="results">
-          <div>Distance: {distance ? `${distance.toFixed(2)} m` : "—"}</div>
-          <div>Altitude: {altitude ? `${altitude.toFixed(2)} m` : "—"}</div>
+          <div>Distance to bird : {distance ? `${distance.toFixed(2)} m` : "—"}</div>
+          {/*<div>Altitude: {altitude ? `${altitude.toFixed(2)} m` : "—"}</div>*/}
           {uncertainty != null && (
             <div className="footer-note">
               Estimated uncertainty: ±{(uncertainty * 100).toFixed(1)}% ({(distance-distance*uncertainty).toFixed(2)}m to {(distance+distance*uncertainty).toFixed(2)}m)
