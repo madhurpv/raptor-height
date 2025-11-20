@@ -91,6 +91,19 @@
   margin-bottom: 12px;
 }
 
+
+.popup-card a {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.popup-card a:hover {
+  font-size: 101%;
+  color: var(--accent-hover);
+  transition:cubic-bezier(0.455, 0.03, 0.515, 0.955) 0.5s;
+}
+
 /* =========================================================
    ANIMATIONS
 ========================================================= */
