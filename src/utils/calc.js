@@ -8,9 +8,22 @@ export function pixelsDistance(pt1, pt2) {
 
 // Main distance formula using 35-mm equivalent focal length and 3:2 images
 // D (metres) = (L (metres) * f35 (mm) * W_px) / (36 * s_px)
-export function computeDistanceMeters({ L_m, f35_mm, W_px, s_px }) {
+export function computeDistanceMeters({ L_m, f35_mm, W_px, H_px, s_px }) {
   if (!s_px || s_px <= 0) return null;
-  const D = (L_m * f35_mm * W_px) / (36 * s_px);
+
+  // Determine aspect ratio to guess sensor format width equivalence
+  // 3:2 aspect ratio -> width factor is 36mm
+  // 4:3 aspect ratio -> width factor is ~34.6mm (since diagonal matches, but width is narrower)
+  const aspectRatio = W_px / H_px;
+  
+  // Default to 36 for 3:2 (1.5), adjust for 4:3 (1.33)
+  // Note: This assumes f35 is diagonal-based for non-3:2 sensors, which is standard.
+  let sensorWidthEquiv = 36; 
+  if (Math.abs(aspectRatio - 1.333) < 0.1) {
+      sensorWidthEquiv = 34.6; // Approximation for 4:3
+  }
+
+  const D = (L_m * f35_mm * W_px) / (sensorWidthEquiv * s_px);
   return D;
 }
 

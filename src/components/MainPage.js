@@ -57,6 +57,7 @@ export default function MainPage() {
         L_m,
         f35_mm: parseFloat(f35),
         W_px,
+        H_px,
         s_px: sPx,
       });
       setDistance(D);
