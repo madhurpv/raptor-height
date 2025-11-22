@@ -46,7 +46,7 @@ export default function StartingInfo({ onClose }) {
                 <li>The calculations can be improved in many ways, like improving calculations based off aspect ratio. But such changes would only make the tool more precise, not more accurate.</li>
             </ul>
             <p>If you find any errors, please feel free to contact me!</p>
-            <p>If you want to contribute, head over to <a href="https://github.com/madhurpv/raptor-height">https://github.com/madhurpv/raptor-height</a></p>
+            <p>If you want to contribute, head over to <a href="https://github.com/madhurpv/raptor-height/tree/master">https://github.com/madhurpv/raptor-height/tree/master</a></p>
         </div>
       </div>
     </div>

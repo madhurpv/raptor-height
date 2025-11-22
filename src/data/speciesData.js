@@ -55,6 +55,13 @@ const speciesData = [
     source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Clark, W. S., J. S. Marks, G. M. Kirwan, and P. F. D. Boesman (2020). Black Eagle (Ictinaetus malaiensis), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.blaeag1.01"
   },
   {
+    id: "bootedeagle",
+    name: "Booted Eagle (1.225m)",
+    wingspan_m: 1.255,
+    variance: 0.125,
+    source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Orta, J., P. F. D. Boesman, and J. S. Marks (2020). Booted Eagle (Hieraaetus pennatus), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.booeag1.01"
+  },
+  {
     id: "tawnyeagle",
     name: "Tawny Eagle (1.71m)",
     wingspan_m: 1.71,

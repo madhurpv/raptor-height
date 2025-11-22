@@ -37,5 +37,5 @@ export function estimateRelativeUncertainty({ delta_f35_mm, delta_L_m, delta_s_p
   return relF + relL + relS; // fraction (e.g., 0.05 = 5%)*/
 
   //console.log(s_px);
-  return (selectedSpecies.variance)/selectedSpecies.wingspan_m + 1/(10*s_px);   // 1/(10*s_px) ensures that smaller widths in pixels are penalized more, as those have greater possibility of error
+  return (selectedSpecies.variance)/selectedSpecies.wingspan_m + 10.0/(s_px);   // 1/(10*s_px) ensures that smaller widths in pixels are penalized more, as those have greater possibility of error
 }
