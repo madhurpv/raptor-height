@@ -56,7 +56,7 @@ const speciesData = [
   },
   {
     id: "bootedeagle",
-    name: "Booted Eagle (1.225m)",
+    name: "Booted Eagle (1.23m)",
     wingspan_m: 1.255,
     variance: 0.125,
     source: "Ferguson-Lees, J., and D. A. Christie (2001). Raptors of the World. Christopher Helm, London, United Kingdom., as cited in Orta, J., P. F. D. Boesman, and J. S. Marks (2020). Booted Eagle (Hieraaetus pennatus), version 1.0. In Birds of the World (J. del Hoyo, A. Elliott, J. Sargatal, D. A. Christie, and E. de Juana, Editors). Cornell Lab of Ornithology, Ithaca, NY, USA. https://doi.org/10.2173/bow.booeag1.01"
