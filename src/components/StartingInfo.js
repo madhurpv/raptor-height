@@ -23,6 +23,7 @@ export default function StartingInfo({ onClose }) {
 
         <div className="popup-scroll">
           <h2>Welcome to Bird Altitude Estimator!</h2>
+            <p><b>Update!</b> Here is a <a href="https://youtu.be/XE0aDJy1uUc" target="_blank">Youtube Video</a> explaining how to use this tool!</p>
             <p>This website helps you calculate the distance between your camera and the bird flying over you!</p>
             <p>How to use - </p>
             <ol>
@@ -46,7 +47,7 @@ export default function StartingInfo({ onClose }) {
                 <li>The calculations can be improved in many ways, especially by adding more parameters. But such changes would only make the tool more precise, not necessarily more accurate.</li>
             </ul>
             <p>If you find any errors, orhave any feedback/suggestions, please feel free to contact me through <a href="https://docs.google.com/forms/d/e/1FAIpQLSebqvj4onLsT5J75vfA8aqOJvf9EmdOcX0XUWZkMnk6zczA8A/viewform?usp=dialog" target="_blank">https://docs.google.com/forms/d/e/1FAIpQLSebqvj4onLsT5J75vfA8aqOJvf9EmdOcX0XUWZkMnk6zczA8A/viewform?usp=dialog</a></p>
-            <p>If you want to contribute, head over to <a href="https://github.com/madhurpv/raptor-height/tree/master">https://github.com/madhurpv/raptor-height/tree/master</a></p>
+            <p>If you want to contribute, head over to <a href="https://github.com/madhurpv/raptor-height/tree/master" target="_blank">https://github.com/madhurpv/raptor-height/tree/master</a></p>
         </div>
       </div>
     </div>
